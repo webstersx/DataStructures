@@ -66,7 +66,28 @@ ll.contains(1)
 ll.contains(2)
 
 ll.size
-ll.size = 3
+let lll = LinkedList<Int>()
+
+ll == lll
+ll === lll
+
+let a = LinkedList<Int>()
+let b = LinkedList<Int>()
+
+a.add(1)
+b.add(1)
+
+a == b
+a.add(2)
+a == b
+b.add(2)
+a == b
+
+let c = LinkedList<String>()
+
+a == c
+
+
 
 
 
