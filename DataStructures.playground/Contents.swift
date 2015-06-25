@@ -65,6 +65,10 @@ ll.find(2)?.object
 ll.contains(1)
 ll.contains(2)
 
+ll.size
+ll.size = 3
+
+
 
 
 

@@ -28,9 +28,9 @@ public func ==<T:Equatable>(item1: LinkedListItem<T>, item2: LinkedListItem<T>) 
 public class LinkedList<T:Equatable> {
     
     
-    public var head : LinkedListItem<T>?
-    public var tail : LinkedListItem<T>?
-    var length : Int = 0
+    private(set) public var head : LinkedListItem<T>?
+    private(set) public var tail : LinkedListItem<T>?
+    private(set) public var size : Int = 0
     
     public init() {
         head = nil
@@ -51,7 +51,7 @@ public class LinkedList<T:Equatable> {
             tail = item
         }
         
-        length++
+        size++
         
         return item
     }
@@ -62,7 +62,6 @@ public class LinkedList<T:Equatable> {
             if item!.object == object {
                 return item
             }
-            
         }
         
         return nil;
@@ -70,10 +69,6 @@ public class LinkedList<T:Equatable> {
     
     public func contains(object:T) -> Bool {
         return find(object) != nil
-    }
-    
-    public func size() -> Int {
-        return length
     }
     
     
