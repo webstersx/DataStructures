@@ -8,29 +8,28 @@
 
 import Foundation
 
-public class Item : DebugPrintable, Printable {
+public class LinkedListItem<T:Equatable> {
     
-    public var object : AnyObject
-    public var next : Item?
-    public var prev : Item?
+    public var object : T
+    public var next : LinkedListItem<T>?
+    public var prev : LinkedListItem<T>?
     
-    public init(object:AnyObject) {
+    public init(object:T) {
         self.object = object
     }
     
-    public var debugDescription : String {
-        return "\(object)"
-    }
-    
-    public var description : String {
-        return debugDescription
-    }
+
 }
 
-public class LinkedList {
+public func ==<T:Equatable>(item1: LinkedListItem<T>, item2: LinkedListItem<T>) -> Bool {
+    return item1.object == item2.object
+}
+
+public class LinkedList<T:Equatable> {
     
-    public var head : Item?
-    public var tail : Item?
+    
+    public var head : LinkedListItem<T>?
+    public var tail : LinkedListItem<T>?
     var length : Int = 0
     
     public init() {
@@ -38,8 +37,8 @@ public class LinkedList {
         tail = nil
     }
     
-    public func add(object:AnyObject) -> Item {
-        let item = Item(object: object);
+    public func add(object:T) -> LinkedListItem<T> {
+        let item = LinkedListItem<T>(object: object);
         
         //first item
         if tail == nil {
@@ -57,12 +56,10 @@ public class LinkedList {
         return item
     }
     
-    public func find(object:AnyObject) -> Item? {
-        
-        var foundItem : Item?
+    public func find(object:T) -> LinkedListItem<T>? {
         
         for var item = head; item != nil; item = item!.next {
-            if item!.object.isEqual(object) {
+            if item!.object == object {
                 return item
             }
             
@@ -71,7 +68,7 @@ public class LinkedList {
         return nil;
     }
     
-    public func contains(object:AnyObject) -> Bool {
+    public func contains(object:T) -> Bool {
         return find(object) != nil
     }
     
@@ -81,3 +78,4 @@ public class LinkedList {
     
     
 }
+

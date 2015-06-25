@@ -24,13 +24,6 @@ class DataStructuresKitTests: XCTestCase {
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
-        let ll = LinkedList()
-        ll.add(1)
-        ll.add(2)
-        
-        if let h = ll.head, o = h.object as? Int {
-            XCTAssertEqual(o, 1)
-        }
     }
     
     func testPerformanceExample() {
@@ -45,7 +38,7 @@ class DataStructuresKitTests: XCTestCase {
 class LinkedListsTests: XCTestCase {
     
     func testInitCreatesEmptyList() {
-        let ll = LinkedList()
+        let ll = LinkedList<Int>()
 
         XCTAssert(ll.size() == 0, "a new linked list should be of size 0");
         XCTAssertNil(ll.head, "head of a new linked list should be nil");
@@ -54,7 +47,7 @@ class LinkedListsTests: XCTestCase {
     }
     
     func testAddOneItem() {
-        let ll = LinkedList()
+        let ll = LinkedList<Int>()
         
         let item = ll.add(1)
         XCTAssert(ll.size() == 1, "after 1 add, list should be of size 1")
@@ -67,7 +60,7 @@ class LinkedListsTests: XCTestCase {
     }
     
     func testAddTwoItems() {
-        let ll = LinkedList()
+        let ll = LinkedList<Int>()
         
         let head = ll.add(1)
         let tail = ll.add(2)
@@ -81,7 +74,7 @@ class LinkedListsTests: XCTestCase {
     }
     
     func testAddThreeItems() {
-        let ll = LinkedList()
+        let ll = LinkedList<Int>()
         
         let head = ll.add(1)
         let middle = ll.add(2)
@@ -97,7 +90,7 @@ class LinkedListsTests: XCTestCase {
     }
     
     func testFind() {
-        let ll = LinkedList()
+        let ll = LinkedList<Int>()
         let i = ll.add(1)
         let j = ll.add(2)
         let k = ll.find(1)
@@ -108,8 +101,8 @@ class LinkedListsTests: XCTestCase {
     }
     
     func testContains() {
-        let ll = LinkedList()
-        let i = ll.add(1)
+        let ll = LinkedList<Int>()
+        ll.add(1)
         XCTAssertTrue(ll.contains(1), "the list should contain the inserted item")
         XCTAssertFalse(ll.contains(2), "the list should not contain an item that wasn't inserted")
     }
