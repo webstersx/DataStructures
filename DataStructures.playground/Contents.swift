@@ -2,4 +2,24 @@
 
 import UIKit
 
-var str = "Data Structures Playground"
+import DataStructuresKit
+
+var ll = LinkedList()
+
+var x = ll.head
+var y = ll.tail
+
+ll.add(1)
+ll.add(2)
+
+
+ll.find(1)
+
+ll.contains(2)
+
+
+
+
+
+
+
