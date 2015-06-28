@@ -8,48 +8,41 @@
 
 import Foundation
 
-public class LinkedListItem<T:Equatable> {
+public class LinkedItem<T:Equatable> {
     
-    public var object : T
-    public var next : LinkedListItem<T>?
-    public var prev : LinkedListItem<T>?
+    public var value : T
+    public var next : LinkedItem<T>?
     
-    public init(object:T) {
-        self.object = object
+    public init(value:T) {
+        self.value = value
     }
+
 }
 
-public func ==<T:Equatable>(item1: LinkedListItem<T>, item2: LinkedListItem<T>) -> Bool {
-    return item1.object == item2.object
+public func ==<T:Equatable>(item1: LinkedItem<T>, item2: LinkedItem<T>) -> Bool {
+    return item1.value == item2.value
 }
 
-public func ==<T,U>(item1: LinkedListItem<T>, item2:LinkedListItem<U>) -> Bool {
+public func ==<T,U>(item1: LinkedItem<T>, item2:LinkedItem<U>) -> Bool {
     return false
 }
 
 public class LinkedList<T:Equatable> {
     
-    private(set) public var head : LinkedListItem<T>?
-    private(set) public var tail : LinkedListItem<T>?
+    private(set) public var head : LinkedItem<T>?
+    private(set) public var tail : LinkedItem<T>?
     private(set) public var size : Int = 0
-    
-    /* suggested API functions
-    - findNext(item)
-    - promote(item)
-    - demote(item)
-    - moveToHead
-    - moveToTail
-    - remove
-    - equals
-    */
     
     public init() {
         head = nil
         tail = nil
     }
     
-    public func add(object:T) -> LinkedListItem<T> {
-        let item = LinkedListItem<T>(object: object);
+    /**
+    Add a value to the linked list at position 'tail' - O(1)
+    */
+    public func add(value:T) -> LinkedItem<T> {
+        let item = LinkedItem<T>(value: value);
         
         //first item
         if tail == nil {
@@ -57,7 +50,6 @@ public class LinkedList<T:Equatable> {
             head = tail
         } else {
             //move tail
-            item.prev = tail
             tail!.next = item
             tail = item
         }
@@ -67,10 +59,53 @@ public class LinkedList<T:Equatable> {
         return item
     }
     
-    public func find(object:T) -> LinkedListItem<T>? {
+    /**
+    Remove an item from the linked list
+    */
+    public func remove(item: LinkedItem<T>) -> LinkedItem<T>? {
+        if size == 0 {
+            return nil
+        } else if size == 1 && item == head! {
+            head = nil
+            tail = nil
+            size--
+            return item
+        } else if item == head! {
+            head = head?.next
+            size--
+            return item
+        } else {
+            var i = head;
+            var j = head?.next
+            
+            while (j != nil) {
+                if j! == item {
+                    if (j! == tail!) {
+                        tail = i
+                    }
+                    
+                    i?.next = j?.next
+                    size--
+                    return j!
+                }
+                
+                i = j
+                j = j?.next
+            }
+        }
+        
+        return nil
+    }
+    
+    /**
+    Find a value in the linked list
+    
+    O(n)
+    */
+    public func find(value:T) -> LinkedItem<T>? {
         
         for var item = head; item != nil; item = item!.next {
-            if item!.object == object {
+            if item!.value == value {
                 return item
             }
         }
@@ -78,8 +113,15 @@ public class LinkedList<T:Equatable> {
         return nil;
     }
     
-    public func contains(object:T) -> Bool {
-        return find(object) != nil
+    /**
+    Specify whether a value is in the linked list
+    
+    O(n)
+    
+    See also: find(value:T)
+    */
+    public func contains(value:T) -> Bool {
+        return find(value) != nil
     }
 }
 
@@ -90,7 +132,7 @@ public func ==<T:Equatable>(list1: LinkedList<T>, list2:LinkedList<T>) -> Bool {
     }
     
     for var i=list1.head, j=list2.head; i != nil && j != nil; i=i?.next, j=j?.next {
-        if i?.object != j?.object {
+        if i?.value != j?.value {
             return false
         }
     }
