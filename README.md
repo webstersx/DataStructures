@@ -8,9 +8,9 @@ A rough idea of what will be implemented (or built upon other data structures):
 - Stack
 - Priority Queue (min/max)
 - Symbol Table
-- Binary Tree
-- 2-3 Tree, Red-Black Tree
+- Binary Tree, 2-3 Tree, Red-Black Tree
 - Hash Table
+- Trie
 - Graph, Directed Graph, Weighted Graph
 - more TBD
 
