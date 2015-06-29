@@ -7,8 +7,11 @@ A rough idea of what will be implemented (or built upon other data structures):
 - Queue
 - Stack
 - Priority Queue (min/max)
+- Symbol Table
 - Binary Tree
+- 2-3 Tree, Red-Black Tree
+- Hash Table
 - Graph, Directed Graph, Weighted Graph
-- TBC.
+- more TBD
 
 These Data Structures will be used to develop Algorithms inside of a sister-repository: [Algorithms](https://github.com/webstersx/Algorithms)
