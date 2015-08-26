@@ -5,7 +5,7 @@ import UIKit
 import DataStructuresKit
 
 /* //Link Lists
-var ll = LinkedList()
+var ll = SinglyLinkedList()
 ll.size()
 ll.head
 ll.tail
@@ -29,8 +29,8 @@ ll.head?.next
 ll.tail?.prev
 */
 
-let i1 = LinkedListItem<Int>(object: 1)
-let i2 = LinkedListItem<Int>(object: 2)
+let i1 = SinglyLinkedListItem<Int>(object: 1)
+let i2 = SinglyLinkedListItem<Int>(object: 2)
 i1.next = i2
 i2.prev = i1
 
@@ -38,7 +38,7 @@ i1.object
 i2.object
 i1.next?.prev?.next?.object
 
-let ll = LinkedList<Int>()
+let ll = SinglyLinkedList<Int>()
 let first = ll.add(1)
 let second = ll.add(1)
 
@@ -66,13 +66,13 @@ ll.contains(1)
 ll.contains(2)
 
 ll.size
-let lll = LinkedList<Int>()
+let lll = SinglyLinkedList<Int>()
 
 ll == lll
 ll === lll
 
-let a = LinkedList<Int>()
-let b = LinkedList<Int>()
+let a = SinglyLinkedList<Int>()
+let b = SinglyLinkedList<Int>()
 
 a.add(1)
 b.add(1)
@@ -83,14 +83,4 @@ a == b
 b.add(2)
 a == b
 
-let c = LinkedList<String>()
-
-a == c
-
-
-
-
-
-
-
-
+let
