@@ -1,5 +1,5 @@
 //
-//  SinglyLinkedList.swift
+//  LinkedNode.swift
 //  DataStructuresKit
 //
 //  Created by Shawn Webster on 24/06/2015.
@@ -12,18 +12,34 @@ public class LinkedNode<T:Equatable> {
     
     public var value : T
     public var next : LinkedNode<T>? = nil
-    public var prev : LinkedNode<T>? = nil
     
     public init(value:T) {
         self.value = value
     }
 }
 
-public class SinglyLinkedList<T:Equatable>: CustomStringConvertible {
+public class LinkedList<T:Equatable>: CustomStringConvertible {
+    
+    /*
+    Properties
+    .value
+    .next?
+    .length
+    
+    Functions
+    add(value)
+    append(node)
+    prepend(node)
+    remove(node)
+    (node) nodeAtPosition(index)
+    replace(node, value)
+    (bool)isEmpty
+    (string)description
+    */
     
     private(set) public var head : LinkedNode<T>? = nil
     private(set) public var tail : LinkedNode<T>? = nil
-    private(set) public var size : Int = 0
+    private(set) public var length : Int = 0
     public var description : String {
         
         var d : String = ""
@@ -44,79 +60,128 @@ public class SinglyLinkedList<T:Equatable>: CustomStringConvertible {
         }
 
         return d
-        
     }
     
     public init() {
     }
     
+    public func isEmpty() -> Bool {
+        return length == 0
+    }
+    
+    /**
+        Add a value to the end of the linked list - O(1)
+    */
+    
+    public func add(value:T) {
+        let item = LinkedNode<T>(value: value)
+        append(item)
+    }
+    
     /**
     Add a value to the end of a linked list - O(1)
     */
-    public func append(value:T) -> Void {
-        
-        let item = LinkedNode<T>(value: value)
+    public func append(node:LinkedNode<T>) {
 
-        //if this is the first item
-        if tail == nil {
-            head = item
+        if self.isEmpty() {
+            head = node
         } else {
-            //move tail to the new item
-            tail!.next = item
+            tail?.next = node
         }
-
-        tail = item
-        size++
+        
+        tail = node
+        length++
     }
     
     /**
-    Add a value to the front of the linked list - O(1)
+    Add a node to the front of the linked list - O(1)
     */
-    public func prepend(value:T) -> Void {
+    public func prepend(node:LinkedNode<T>) {
         
-        //create a new node
-        let item = LinkedNode<T>(value:value)
-        item.next = head
-        
-        //if this is the first node
-        if (head == nil) {
-            tail = item
+        if self.isEmpty() {
+            tail = node
         } else {
-            item.next = head
+            node.next = head
         }
         
-        
-        head = item
-        size++
+        head = node
+        length++
     }
     
     /**
-    Remove and return the value stored at the head of the linked list - O(1)
+        Remove a specific node in the list - O(n)
+    */
+    
+    public func remove(node: LinkedNode<T>) {
+        
+        //nothing in the list
+        if self.isEmpty() {
+            return
+        } else if node === head {
+            
+            //removing the only node
+            if head === tail {
+                head = nil
+                tail = nil
+            } else {
+                //removing the head node
+                head = head?.next
+            }
+        } else {
+            //start at head
+            var n = head
+            
+            //position us just before node
+            while n?.next !== node {
+                n = n?.next
+                
+                //if we reached the end and didn't find the node
+                if n == nil {
+                    return
+                }
+            }
+            
+            //move n.next past node
+            n?.next = node.next
+            
+            //if node was tail, set n as tail
+            if node === tail {
+                tail = n
+            }
+        }
+        
+    }
+    
+    /**
+        Remove and return the value stored at the head of the linked list - O(1)
     */
     public func removeFirst() -> T? {
         
-        //if
-        if let h = head, t : T = h.value {
+        //if we have a head
+        if let h = head {
+            
+            //move head
             head = h.next
             
-            if (head == nil) {
+            //if its also tail, we're removing the only item
+            if (h === tail) {
                 tail = nil
             }
             
-            size--
+            //reduce length
+            length--
             
-            return t
+            //return the value
+            return h.value
         }
 
         return nil
     }
     
     /** 
-    Remove and return the tail of the list - O(n)
+        Remove and return the tail of the list - O(n)
     */
     public func removeLast() -> T? {
-        
-        //1, 2+
         
         //if there are items
         if let h = head, t = tail {
@@ -128,16 +193,18 @@ public class SinglyLinkedList<T:Equatable>: CustomStringConvertible {
                 var n : LinkedNode<T>? = h
                 
                 //progress through the list until we're just before tail
-                while (n!.next !== t) {
-                    n = n!.next
+                while (n?.next !== t) {
+                    n = n?.next
                 }
                 
-                //move tail to the next-to-last node
-                tail = n!
-                tail!.next = nil
+                //remove link to current tail
+                n?.next = nil
+                
+                //make this new tail
+                tail = n
             }
             
-            size--
+            length--
             
             return t.value
             
@@ -146,132 +213,153 @@ public class SinglyLinkedList<T:Equatable>: CustomStringConvertible {
         return nil
     }
     
+    /**
+        Reverse the order of the nodes in the list - O(n)
+    */
     public func reverse() {
-        //keep a cursor at tail, start a runner at head moving the element between tail and nil, repeat until we reach tail, then swap head and tail
-        
-        //if head and tail exist
-        if let h = head, t = tail {
-            
-            //if head and tail aren't the same
-            if (h !== t) {
+        //nothing to do
+        if !self.isEmpty() {
+            if head === tail {
+                //swap them
+                head?.next = nil
+                tail?.next = head
+                head = tail
+                tail = head?.next
+            } else {
+                var n = head
                 
-                //start at head
-                var n = h
-                
-                //do this until we reach tail
-                while (n !== t) {
+                while n !== tail {
                     
-                    //capture what the current node used to point to as its next
-                    let m = n.next!
+                    //get this nodes next (so we can move to it next)
+                    let m = n?.next
                     
-                    //set it to what tail currently points to as its next
-                    n.next = t.next
+                    //set this nodes next to node right behind tail
+                    n?.next = tail?.next
                     
-                    //set tail to point to this node
-                    t.next = n
+                    //point tail to this node
+                    tail?.next = n
                     
-                    //move the current node to what this used to point to
+                    //move to the node this used to point to
                     n = m
                 }
                 
-                //swap head and tail
-                n = head!
+                let t = head
                 head = tail
-                tail = n
+                tail = t
                 
             }
         }
     }
 }
 
-public class DoublyLinkedList<T:Equatable>: SinglyLinkedList<T> {
-    
-    override public init() {
-        super.init()
-    }
-    
-    override public func append(value: T) {
-        //capture the current tail if it exists
-        let t = tail
-        super.append(value)
-        
-        if let _ = t {
-            tail?.prev = t
-        }
-    }
-    
-    override public func prepend(value: T) {
-        super.prepend(value)
-        
-        if let _ = head?.next {
-            head?.next?.prev = head
-        }
-    }
-    
-    override public func removeFirst() -> T? {
-        
-        if let f = super.removeFirst() {
-            head?.prev = nil
-            return f
-        }
-        
-        return nil
-    }
-    
-    override public func removeLast() -> T? {
-        
-        if let l = tail {
-            
-            tail = l.prev
-            
-            if (tail == nil) {
-                head = nil
-            }
-        }
-        
-        return nil
-    }
-    
-    override public func reverse() {
-        var n = head
-        
-        while (n != nil) {
-            let p = n?.prev
-            n?.prev = n?.next
-            n?.next = p
-            
-            n = n?.prev
-        }
-    }
-}
+//public class DoublyLinkedList<T:Equatable>: LinkedNode<T> {
+//    
+//    override public init() {
+//        super.init()
+//    }
+//    
+//    override public func append(value: T) {
+//        //capture the current tail if it exists
+//        let t = tail
+//        super.append(value)
+//        
+//        if let _ = t {
+//            tail?.prev = t
+//        }
+//    }
+//    
+//    override public func prepend(value: T) {
+//        super.prepend(value)
+//        
+//        if let _ = head?.next {
+//            head?.next?.prev = head
+//        }
+//    }
+//    
+//    override public func removeFirst() -> T? {
+//        
+//        if let f = super.removeFirst() {
+//            head?.prev = nil
+//            return f
+//        }
+//        
+//        return nil
+//    }
+//    
+//    override public func removeLast() -> T? {
+//        
+//        if let l = tail {
+//            
+//            tail = l.prev
+//            
+//            if (tail == nil) {
+//                head = nil
+//            }
+//        }
+//        
+//        return nil
+//    }
+//    
+//    override public func reverse() {
+//        var n = head
+//        
+//        while (n != nil) {
+//            let p = n?.prev
+//            n?.prev = n?.next
+//            n?.next = p
+//            
+//            n = n?.prev
+//        }
+//    }
+//}
+
 
 /**
-Test whether two linked lists containing items of the same type have all the same values in the same order
+    List equality - O(n)
 */
-public func ==<T:Equatable>(list1: SinglyLinkedList<T>, list2:SinglyLinkedList<T>) -> Bool {
+public func ==<T:Equatable>(list1: LinkedList<T>, list2:LinkedList<T>) -> Bool {
     
-    if list1.size != list2.size {
+    if list1.length != list2.length {
         return false
     }
     
-    for var i=list1.head, j=list2.head; i != nil && j != nil; i=i?.next, j=j?.next {
+    var i = list1.head
+    var j = list2.head
+
+    
+    while (i != nil && j != nil) {
+        
         if i?.value != j?.value {
             return false
         }
+        
+        i = i?.next
+        j = j?.next
     }
     
     return true
 }
 
-public func !=<T:Equatable>(list1: SinglyLinkedList<T>, list2:SinglyLinkedList<T>) -> Bool {
-    return !(list1==list2)
+/**
+    List inequality - O(n)
+*/
+public func !=<T:Equatable>(list1: LinkedList<T>, list2:LinkedList<T>) -> Bool {
+    return !(list1 == list2)
 }
+
 
 /**
-Two lists containing different types of items are not equal
+    Node equality - O(n)
 */
-public func ==<T,U>(list1: SinglyLinkedList<T>, list2:SinglyLinkedList<U>) -> Bool {
-    return false
+public func ==<T:Equatable>(node1: LinkedNode<T>, node2:LinkedNode<T>) -> Bool {
+    return node1.value == node2.value
 }
 
+
+/**
+    Node inequality - O(n)
+*/
+public func !=<T:Equatable>(node1: LinkedNode<T>, node2:LinkedNode<T>) -> Bool {
+    return !(node1==node2)
+}
 

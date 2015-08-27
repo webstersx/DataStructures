@@ -7,9 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		611F24561B8D9FF900033BB2 /* LinkedList2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 611F24551B8D9FF900033BB2 /* LinkedList2.swift */; };
+		615D5F541B8DBCBA0090541C /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615D5F531B8DBCBA0090541C /* Stack.swift */; };
+		615D5F561B8DBE4D0090541C /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615D5F551B8DBE4D0090541C /* Queue.swift */; };
 		61DC2BF01B3AE6FC00F7D387 /* DataStructuresKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 61DC2BEF1B3AE6FC00F7D387 /* DataStructuresKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		61DC2BF71B3AE6FC00F7D387 /* DataStructuresKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61DC2BEC1B3AE6FC00F7D387 /* DataStructuresKit.framework */; };
-		61DC2BFC1B3AE6FC00F7D387 /* DataStructuresKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61DC2BFB1B3AE6FC00F7D387 /* DataStructuresKitTests.swift */; };
+		61DC2BFC1B3AE6FC00F7D387 /* LinkedListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61DC2BFB1B3AE6FC00F7D387 /* LinkedListTests.swift */; };
 		61DC2C081B3AE77700F7D387 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61DC2C071B3AE77700F7D387 /* LinkedList.swift */; };
 /* End PBXBuildFile section */
 
@@ -24,11 +27,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		611F24551B8D9FF900033BB2 /* LinkedList2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkedList2.swift; sourceTree = "<group>"; };
+		615D5F531B8DBCBA0090541C /* Stack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
+		615D5F551B8DBE4D0090541C /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		61DC2BEC1B3AE6FC00F7D387 /* DataStructuresKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DataStructuresKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		61DC2BEF1B3AE6FC00F7D387 /* DataStructuresKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataStructuresKit.h; sourceTree = "<group>"; };
 		61DC2BF11B3AE6FC00F7D387 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		61DC2BF61B3AE6FC00F7D387 /* DataStructuresKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DataStructuresKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		61DC2BFB1B3AE6FC00F7D387 /* DataStructuresKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStructuresKitTests.swift; sourceTree = "<group>"; };
+		61DC2BFB1B3AE6FC00F7D387 /* LinkedListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListTests.swift; sourceTree = "<group>"; };
 		61DC2BFD1B3AE6FC00F7D387 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		61DC2C071B3AE77700F7D387 /* LinkedList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -75,6 +81,9 @@
 			children = (
 				61DC2BEF1B3AE6FC00F7D387 /* DataStructuresKit.h */,
 				61DC2C071B3AE77700F7D387 /* LinkedList.swift */,
+				611F24551B8D9FF900033BB2 /* LinkedList2.swift */,
+				615D5F531B8DBCBA0090541C /* Stack.swift */,
+				615D5F551B8DBE4D0090541C /* Queue.swift */,
 				61DC2BF11B3AE6FC00F7D387 /* Info.plist */,
 			);
 			path = DataStructuresKit;
@@ -83,7 +92,7 @@
 		61DC2BFA1B3AE6FC00F7D387 /* DataStructuresKitTests */ = {
 			isa = PBXGroup;
 			children = (
-				61DC2BFB1B3AE6FC00F7D387 /* DataStructuresKitTests.swift */,
+				61DC2BFB1B3AE6FC00F7D387 /* LinkedListTests.swift */,
 				61DC2BFD1B3AE6FC00F7D387 /* Info.plist */,
 			);
 			path = DataStructuresKitTests;
@@ -198,6 +207,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				61DC2C081B3AE77700F7D387 /* LinkedList.swift in Sources */,
+				615D5F541B8DBCBA0090541C /* Stack.swift in Sources */,
+				611F24561B8D9FF900033BB2 /* LinkedList2.swift in Sources */,
+				615D5F561B8DBE4D0090541C /* Queue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -205,7 +217,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				61DC2BFC1B3AE6FC00F7D387 /* DataStructuresKitTests.swift in Sources */,
+				61DC2BFC1B3AE6FC00F7D387 /* LinkedListTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,6 +397,7 @@
 				61DC2C021B3AE6FC00F7D387 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		61DC2C031B3AE6FC00F7D387 /* Build configuration list for PBXNativeTarget "DataStructuresKitTests" */ = {
 			isa = XCConfigurationList;
@@ -393,6 +406,7 @@
 				61DC2C051B3AE6FC00F7D387 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
