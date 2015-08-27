@@ -41,7 +41,6 @@ public class LinkedList2<T:Equatable>: CustomStringConvertible {
         if let n = head {
             
             d += "\(n.value)"
-            
             var m = n.next
             
             while (m != nil) {

@@ -20,41 +20,26 @@ public class LinkedNode<T:Equatable> {
 
 public class LinkedList<T:Equatable>: CustomStringConvertible {
     
-    /*
-    Properties
-    .value
-    .next?
-    .length
-    
-    Functions
-    add(value)
-    append(node)
-    prepend(node)
-    remove(node)
+    /* TODO:
+    remove(node) -> refactor removeFirst, removeLast
     (node) nodeAtPosition(index)
-    replace(node, value)
-    (bool)isEmpty
-    (string)description
+    replace(node, value) -> necessary?
     */
     
     private(set) public var head : LinkedNode<T>? = nil
     private(set) public var tail : LinkedNode<T>? = nil
     private(set) public var length : Int = 0
     public var description : String {
-        
         var d : String = ""
         
         if let n = head {
-            
             d += "\(n.value)"
-            
             var m = n.next
             
             while (m != nil) {
                 d += " -> \(m!.value)"
                 m = m!.next
             }
-            
         } else {
             d = "[ empty ]"
         }
@@ -251,68 +236,6 @@ public class LinkedList<T:Equatable>: CustomStringConvertible {
         }
     }
 }
-
-//public class DoublyLinkedList<T:Equatable>: LinkedNode<T> {
-//    
-//    override public init() {
-//        super.init()
-//    }
-//    
-//    override public func append(value: T) {
-//        //capture the current tail if it exists
-//        let t = tail
-//        super.append(value)
-//        
-//        if let _ = t {
-//            tail?.prev = t
-//        }
-//    }
-//    
-//    override public func prepend(value: T) {
-//        super.prepend(value)
-//        
-//        if let _ = head?.next {
-//            head?.next?.prev = head
-//        }
-//    }
-//    
-//    override public func removeFirst() -> T? {
-//        
-//        if let f = super.removeFirst() {
-//            head?.prev = nil
-//            return f
-//        }
-//        
-//        return nil
-//    }
-//    
-//    override public func removeLast() -> T? {
-//        
-//        if let l = tail {
-//            
-//            tail = l.prev
-//            
-//            if (tail == nil) {
-//                head = nil
-//            }
-//        }
-//        
-//        return nil
-//    }
-//    
-//    override public func reverse() {
-//        var n = head
-//        
-//        while (n != nil) {
-//            let p = n?.prev
-//            n?.prev = n?.next
-//            n?.next = p
-//            
-//            n = n?.prev
-//        }
-//    }
-//}
-
 
 /**
     List equality - O(n)
